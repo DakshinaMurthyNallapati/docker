@@ -1,5 +1,7 @@
 #!/bin/bash
 
+ARCH=amd64
+PLATFORM=$(uname -s)_$ARCH
 
 growpart /dev/nvme0n1 4
 lvextend -l +50%FREE /dev/RootVG/rootVol
@@ -14,8 +16,7 @@ systemctl enable docker
 systemctl start docker
 usermod -aG docker ec2-user
 
-ARCH=amd64
-PLATFORM=$(uname -s)_$ARCH
+
 
 #kubectl install
 curl -O https://s3.us-west-2.amazonaws.com/amazon-eks/1.32.0/2024-12-20/bin/linux/amd64/kubectl
